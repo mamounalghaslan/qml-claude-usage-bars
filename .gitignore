@@ -1,0 +1,5 @@
+# Local-only planning and snapshot output — never committed.
+docs/superpowers/
+checkpoints/
+specs/
+.superpowers/

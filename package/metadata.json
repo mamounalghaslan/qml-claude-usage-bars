@@ -1,0 +1,13 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Category": "System Information",
+        "Description": "Weekly and Fable Claude usage limits as horizontal bars",
+        "Icon": "utilities-system-monitor",
+        "Id": "local.claudeusagebars",
+        "License": "GPL-2.0-or-later",
+        "Name": "Claude Usage Bars",
+        "Version": "1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

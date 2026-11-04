@@ -1,0 +1,6 @@
+[Unit]
+Description=Fetch Claude plan usage for the Plasma usage bars
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/claude-usage-fetch

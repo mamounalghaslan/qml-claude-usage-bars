@@ -3,3 +3,5 @@ docs/superpowers/
 checkpoints/
 specs/
 .superpowers/
+__pycache__/
+*.pyc

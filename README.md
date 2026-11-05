@@ -16,7 +16,8 @@ Pure QML plus a small Python poller — no C++ plugin, nothing under `/usr`.
 - A systemd user timer runs the script every 3 minutes.
 - The widget (`package/`) reads that file every 30 s. Left-click refreshes immediately
   (runs the fetch script, then re-reads); middle-click opens the popup with labels and
-  reset times; hover for a tooltip. Bars use the accent color and switch
+  reset times; hover for a tooltip. Each bar is split into five 20% sections by thin
+  gaps so the level reads at a glance. Bars use the accent color and switch
   to the warning color above 90%. Stale data is dimmed.
 
 ## Install

@@ -103,8 +103,8 @@ PlasmoidItem {
     }
 
     compactRepresentation: MouseArea {
-        Layout.minimumWidth: Kirigami.Units.gridUnit * 3
-        Layout.preferredWidth: Kirigami.Units.gridUnit * 4
+        Layout.minimumWidth: Kirigami.Units.gridUnit * 4.5
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 6
         Layout.minimumHeight: Kirigami.Units.smallSpacing * 2 + 1
 
         opacity: root.stale ? 0.5 : (root.refreshing ? 0.7 : 1)

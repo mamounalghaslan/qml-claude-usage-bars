@@ -26,6 +26,19 @@ ProgressBar {
             color: bar.color
             radius: height / 2
         }
+
+        // Four gaps split the bar into five 20% sections so the level can be
+        // read at a glance. Drawn in the panel color, over track and fill alike.
+        Repeater {
+            model: 4
+
+            Rectangle {
+                width: Kirigami.Units.smallSpacing / 2
+                height: parent.height
+                x: parent.width * (index + 1) / 5 - width / 2
+                color: Kirigami.Theme.backgroundColor
+            }
+        }
     }
 
     background: Rectangle {

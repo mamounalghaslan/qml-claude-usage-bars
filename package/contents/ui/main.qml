@@ -43,7 +43,7 @@ PlasmoidItem {
 
     function resetTime(entry) {
         return entry && entry.resets_at
-               ? Qt.formatDateTime(new Date(entry.resets_at), Locale.ShortFormat)
+               ? Qt.formatDateTime(new Date(entry.resets_at), "ddd. d/M/yy h:mmAP")
                : ""
     }
 
@@ -186,7 +186,7 @@ PlasmoidItem {
                     Layout.fillWidth: true
                     level: 5
                     opacity: 0.7
-                    text: i18n("Resets %1", root.resetTime(modelData.entry))
+                    text: i18n("Resets on %1", root.resetTime(modelData.entry))
                     visible: root.sharedReset === "" && root.resetTime(modelData.entry) !== ""
                 }
             }
@@ -197,7 +197,7 @@ PlasmoidItem {
             horizontalAlignment: Text.AlignHCenter
             level: 5
             opacity: 0.7
-            text: i18n("Resets %1", root.sharedReset)
+            text: i18n("Resets on %1", root.sharedReset)
             visible: root.sharedReset !== ""
         }
 

@@ -4,8 +4,8 @@ import QtQuick.Controls
 
 import org.kde.kirigami as Kirigami
 
-// Same look as the stock Horizontal Bars face (org.kde.ksysguard.horizontalbars):
-// a pill track tinted 10% toward the text color, with a pill fill on top.
+// Based on the stock Horizontal Bars face (org.kde.ksysguard.horizontalbars),
+// but with square ends: a track tinted 10% toward the text color, with a fill on top.
 ProgressBar {
     id: bar
 
@@ -24,7 +24,7 @@ ProgressBar {
             width: bar.visualPosition * parent.width
             height: parent.height
             color: bar.color
-            radius: height / 2
+            radius: 0
         }
 
         // Four gaps split the bar into five 20% sections so the level can be
@@ -45,6 +45,6 @@ ProgressBar {
         implicitWidth: 100
         implicitHeight: Kirigami.Units.largeSpacing
         color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.1)
-        radius: height / 2
+        radius: 0
     }
 }

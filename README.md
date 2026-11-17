@@ -17,7 +17,9 @@ Pure QML plus a small Python poller — no C++ plugin, nothing under `/usr`.
 - The widget (`package/`) reads that file every 30 s. Left-click refreshes immediately
   (runs the fetch script, then re-reads); middle-click opens the popup with labels and
   reset times; hover for a tooltip. Each bar is split into five 20% sections by thin
-  gaps so the level reads at a glance. Bars use the accent color and switch
+  gaps so the level reads at a glance. Whenever the widget refreshes, a light band
+  sweeps across both bars from left to right: it keeps sweeping while a click-refresh
+  is fetching, and runs once when the background timer brings new numbers. Bars use the accent color and switch
   to the warning color above 90%. Stale data is dimmed.
 
 ## Install

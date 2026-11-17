@@ -72,7 +72,36 @@ PlasmoidItem {
             return
         }
         refreshing = true
+        scan()
         source.connectSource(fetchCommand)
+    }
+
+    // Left-to-right "scan" across both bars, shown whenever the widget refreshes.
+    // While a click-refresh is still fetching it keeps sweeping; otherwise it
+    // finishes the current pass and stops.
+    property real scanPosition: -1
+
+    function scan() {
+        if (!scanAnimation.running) {
+            scanAnimation.start()
+        }
+    }
+
+    NumberAnimation {
+        id: scanAnimation
+        target: root
+        property: "scanPosition"
+        from: 0
+        to: 1
+        duration: 700
+        easing.type: Easing.InOutSine
+        onFinished: {
+            if (root.refreshing) {
+                start()
+            } else {
+                root.scanPosition = -1
+            }
+        }
     }
 
     P5Support.DataSource {
@@ -82,10 +111,15 @@ PlasmoidItem {
         connectedSources: ["cat \"" + root.usageFile + "\" 2>/dev/null"]
         onNewData: function (sourceName, data) {
             root.now = Date.now() / 1000
+            const previousFetch = root.usage?.fetched_at
             try {
                 root.usage = JSON.parse(data["stdout"])
             } catch (e) {
                 root.usage = null
+            }
+            // New numbers from the background timer also get a sweep.
+            if (root.usage?.fetched_at !== undefined && root.usage.fetched_at !== previousFetch) {
+                root.scan()
             }
             if (sourceName === root.fetchCommand) {
                 disconnectSource(sourceName)
@@ -107,7 +141,7 @@ PlasmoidItem {
         Layout.preferredWidth: Kirigami.Units.gridUnit * 6
         Layout.minimumHeight: Kirigami.Units.smallSpacing * 2 + 1
 
-        opacity: root.stale ? 0.5 : (root.refreshing ? 0.7 : 1)
+        opacity: root.stale ? 0.5 : 1
         hoverEnabled: true
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton
         onClicked: function (mouse) {
@@ -137,6 +171,7 @@ PlasmoidItem {
 
                     value: root.percentOf(modelData.entry)
                     color: root.colorOf(modelData.entry)
+                    scanPosition: root.scanPosition
                 }
             }
 
@@ -169,6 +204,7 @@ PlasmoidItem {
                 Bar {
                     value: root.percentOf(modelData.entry)
                     color: root.colorOf(modelData.entry)
+                    scanPosition: root.scanPosition
                 }
 
                 ChartsControls.LegendDelegate {
